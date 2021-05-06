@@ -1,0 +1,31 @@
+{
+    "name": "intersezionicongliassi",
+    "version": "1.0.0",
+    "description": "Programma che risolve le equazioni di ogni grado utilizzando Ruffini",
+    "main": "index.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gabry2003/IntersezioniConGliAssi.git"
+    },
+    "keywords": [
+        "ruffini",
+        "math",
+        "solver"
+    ],
+    "author": "Gabriele Princiotta & Antonino Faraci",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/gabry2003/IntersezioniConGliAssi/issues"
+    },
+    "homepage": "https://github.com/gabry2003/IntersezioniConGliAssi#readme",
+    "devDependencies": {
+        "electron": "^12.0.6"
+    },
+    "dependencies": {
+        "node-notifier": "^9.0.1",
+        "path": "^0.12.7"
+    }
+}

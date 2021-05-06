@@ -1,0 +1,45 @@
+img.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    margin-top: -250px;
+    /* Half the height */
+    margin-left: -250px;
+    /* Half the width */
+}
+
+pre {
+    background-color: #F2F2F2;
+    border-radius: 4px 4px 4px 4px;
+    border: 1px solid #DEDEDE;
+}
+
+.content table {
+    display: block;
+}
+
+.content table td {
+    display: inline-block;
+    margin-bottom: 60px;
+}
+
+body::-webkit-scrollbar-track,
+table::-webkit-scrollbar {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar,
+table::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb,
+table::-webkit-scrollbar-thumb {
+    background-color: #F90;
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent)
+}
