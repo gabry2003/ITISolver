@@ -50,7 +50,7 @@ function numeroRazionale(value, maxdenom) {
 
     if (best.denominatore == 1) return best.numeratore;
 
-    return `\\frac{${best.numeratore.toString()}}{${best.denominatore.toString()}}`;
+    return `\\frac{${best.numeratore.toString()}} {${best.denominatore.toString()}}`;
 }
 
 /**
@@ -306,7 +306,7 @@ function risolviEquazione(equazione, grado, asse) {
             code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
                 <td>`;
-            code += toLatex(`x = (-b \\pm sqrt(b^2-4ac))/2a`);
+            code += toLatex(`x = \\frac{-b \\pm \\sqrt{b^2-4ac}} {2a}`);
 
             code += `${toLatex(asse)}
                 </td>`;
@@ -314,7 +314,7 @@ function risolviEquazione(equazione, grado, asse) {
             code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
                 <td>`;
-            code += toLatex(`x = (-${controllaParentesi((b ? b.coefficiente : 0))} \\pm sqrt(${controllaParentesi((b ? b.coefficiente : 0))}^2-4*${controllaParentesi(a.coefficiente)}*${controllaParentesi(c)}))/${controllaParentesi(a.coefficiente * 2)} = 0`);
+            code += toLatex(`x = \\frac{-${controllaParentesi((b ? b.coefficiente : 0))} \\pm \\sqrt{${controllaParentesi((b ? b.coefficiente : 0))}^2-4*${controllaParentesi(a.coefficiente)}*${controllaParentesi(c)}}} {${controllaParentesi(a.coefficiente * 2)}} = 0`);
 
             code += `${toLatex(asse)}
                 </td>`;
@@ -323,7 +323,7 @@ function risolviEquazione(equazione, grado, asse) {
                 <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
                 <td>`;
 
-            code += toLatex(`x = (-${controllaParentesi((b ? b.coefficiente : 0))} \\pm sqrt(${numeroRazionale(delta)}))/${controllaParentesi(a.coefficiente * 2)}`);
+            code += toLatex(`x = \\frac{-${controllaParentesi((b ? b.coefficiente : 0))} \\pm \\sqrt{${numeroRazionale(delta)}}} {${controllaParentesi(a.coefficiente * 2)}}`);
 
             code += `${toLatex(asse)}
                 </td>`;
@@ -341,10 +341,9 @@ function risolviEquazione(equazione, grado, asse) {
                 // Stampo l'equazione con la radice risolta
                 code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
-            <td>
-                x = (-${controllaParentesi((b ? b.coefficiente : 0))} \\pm ${numeroRazionale(radice)})/${controllaParentesi(a.coefficiente)}
-                
-                ${toLatex(asse)}
+            <td>`;
+                code += toLatex(`x = \\frac{-${controllaParentesi((b ? b.coefficiente : 0))} \\pm ${numeroRazionale(radice)}} {${controllaParentesi(a.coefficiente)}}`);
+                code += `${toLatex(asse)}
             </td>`;
 
                 // Se il delta è uguale a zero
@@ -364,8 +363,7 @@ function risolviEquazione(equazione, grado, asse) {
                         code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
                         <td>
-                            ${toLatex('x_\{' + i + 1 + '\} = ' + numeroRazionale(risultati[i]))}
-                            
+                            ${toLatex('x_\{' + (i + 1) + '\} = ' + numeroRazionale(risultati[i]))}
                             ${toLatex(asse)}
                         </td>`;
                         aggiungiPunto(risultati[i], 0);
@@ -403,7 +401,7 @@ function intersezioneAsse(funzione, asse) {
         code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
 <td>
-    ${toLatex('y = ' + termineNoto)}
+    ${toLatex('y = ' + numeroRazionale(termineNoto))}
     ${toLatex(equazioniAssi[asse])}
 </td>`;
         aggiungiPunto(0, termineNoto);

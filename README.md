@@ -1,12 +1,12 @@
 # Intersezione con gli assi
-Programma che fa l'intersezione con gli assi di una funzione con i passaggi
+Hai bisogno di un software che data una funzione matematica come input ti dia l'intersezione con gli assi, con tutti i passaggi? Hai trovato il programma perfetto per te!
 
-## Start
-``` bash
-npm start
-```
-
-## Installazion
+## Sviluppo
+### Installazione dipendenze
 ``` bash
 npm install
+```
+### Start
+``` bash
+npm start
 ```
