@@ -10,3 +10,15 @@ npm install
 ``` bash
 npm start
 ```
+### Start in modalità sviluppo
+``` bash
+npm dev
+```
+### Creazione pacchetti
+``` bash
+npm run dist
+```
+### Creazione documentazione
+``` bash
+npm run generate-docs
+```

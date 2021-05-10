@@ -5,7 +5,7 @@ const path = require('path');
 let letteraAttuale;
 let puntiAttivi = [];
 
-String.prototype.isAlpha = function() {
+String.prototype.isAlpha = function () {
     return this.match('^[a-zA-Z\(\)]+$');
 };
 
@@ -14,7 +14,25 @@ $(document).ready(() => {
         $('img.loading').fadeOut(500);
         $('#contenuto').fadeIn(500);
     }, 500);
-    $('[name="funzione"]').focus();
+
+    setTimeout(() => {
+        $('[name="funzione"]').focus();
+    }, 1200);
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+            $('#back-to-top').fadeIn();
+        } else {
+            $('#back-to-top').fadeOut();
+        }
+    });
+
+    $('#back-to-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
 });
 
 function calcolaRisultato(funzione) {
@@ -44,18 +62,21 @@ function mostraRisultato() {
 }
 
 function aggiungiPunto(x, y) {
-    // Prendo la lettera successiva per dare il nome al punto
-    const nomePunto = letteraAttuale ? String.fromCharCode(letteraAttuale.charCodeAt(letteraAttuale.length - 1) + 1) : 'A';
-    letteraAttuale = nomePunto;
-    let code = `${$('#lista-punti').html()}
-<li>`;
-    code += toLatex(`${nomePunto}(${numeroRazionale(x)}, ${numeroRazionale(y)})`);
-    code += `</li>`;
-    $('#lista-punti').html(code);
-    puntiAttivi.push({
-        x: x,
-        y: y
-    });
+    if (puntiAttivi.filter(punto => punto.x == x && punto.y == y).length == 0) { // Se questo punto non esiste già
+        // Lo aggiungo
+        puntiAttivi.push({
+            x: x,
+            y: y
+        });
+
+        // Prendo la lettera successiva per dare il nome al punto
+        const nomePunto = letteraAttuale ? String.fromCharCode(letteraAttuale.charCodeAt(letteraAttuale.length - 1) + 1) : 'A';
+        letteraAttuale = nomePunto;
+        let code = `${$('#lista-punti').html()}<li style="list-style-type: none;">`;
+        code += toLatex(`${nomePunto}(${numeroRazionale(x)}, ${numeroRazionale(y)})`);
+        code += `</li>`;
+        $('#lista-punti').html(code);
+    }
 }
 
 $('#form-calcolo').on('submit', (e) => {

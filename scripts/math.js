@@ -24,8 +24,12 @@ function disegnaFunzione(funzione) {
     }
 }
 
-function toLatex(string) {
-    return `\\[${string}\\]`;
+function toLatex(string, add=true) {
+    let risultato = string;
+    if(add) {
+        risultato = `\\[${string}\\]`;
+    }
+    return risultato;
 }
 
 function numeroRazionale(value, maxdenom) {
@@ -193,14 +197,18 @@ function interpretaFunzione(funzione) {
                 }
             })[0];
         },
+        ordina: function() {
+            // Ordino l'array dei termini in modo decrescente in base all'esponente della parte letterale
+            this.termini.sort((a, b) => b.parteLetterale.esponente - a.parteLetterale.esponente);
+        },
         membri: membri
     };
 }
 
 /**
- * Se il numero è negativo aggiunge una parentesi
+ * Funzione che se il numero è negativo aggiunge una parentesi
  * 
- * @param {*} numero 
+ * @param {number} numero Numero da controllare
  */
 function controllaParentesi(numero) {
     numero = numeroRazionale(numero);
@@ -211,9 +219,78 @@ function controllaParentesi(numero) {
 }
 
 /**
+ * Funzione che trova i divisori di un numero
+ * 
+ * @param {number} n Numero di cui trovare i divisori 
+ */
+function trovaDivisori(n) {
+    n = Math.abs(n);    // Faccio il valore assoluto del numero
+
+    let divisori = [];
+
+    for (let i = 1;i <= parseInt(Math.sqrt(n)); i++) {
+        if (n % i == 0) {
+            if (parseInt(n / i) == i) {
+                divisori.push(i);
+            } else {
+                divisori.push(i);
+                divisori.push(parseInt(n / i));
+            }
+        }
+    }
+
+    // Aggiungo anche i numeri negativi
+    divisori = divisori.concat(divisori.map(divisore => -(divisore)));
+    divisori.sort((a, b) => a - b);
+
+    return divisori;
+}
+
+/**
+ * Scompone un'equazione utilizzando il metodo di ruffini
+ * 
+ * @param {*} funzione Funzione da scomporre con ruffini
+ * @returns 
+ */
+function scomponiConRuffini(funzione) {
+    let result = true;
+    let equazioneScomposta = [];
+    let code = ``;
+
+    funzione.ordina();  // Ordino la funzione in modo decrescente in base all'esponente della parte letterale
+    // Cerco i divisori del termine noto
+    let divisori = trovaDivisori(funzione.termineNoto());
+    // Tra i divisori cerco il divisore intero che annulla il polinomio, ovvero "lo zero intero" del polinomio
+
+    // Se non trovo lo zero intero cerco lo zero razionale
+
+    // Divido il polinomio per "x-(x1)" dove "x1" è lo zero
+    // Adesso serve ruffini
+
+    return {
+        equazione: equazioneScomposta,
+        code: code,
+        result: result
+    };
+}
+
+/**
+ * Funzione che scompone un equazione trovando il metodo migliore per scomporla
+ * 
+ * @param {*} funzione Funzione da scomporre
+ */
+function scomponi(funzione) {
+    // Prima di utilizzare la scomposizione con Ruffini provo con altri metodi di scomposizione
+    // Se devo scomporre con Ruffini
+    return scomponiConRuffini(funzione);
+}
+
+/**
  * Risolve un'equazione di gradi maggiori al 2
  * 
- * @param {*} equazione 
+ * @param {string} equazione Equazione da risolvere
+ * @param {number} grado Grado dell'equazione da risolvere
+ * @param {string} asse Asse con cui è stata effettuata l'intersezione
  */
 function risolviEquazioneGradiMaggiori(equazione, grado, asse) {
     let code = ``;
@@ -222,12 +299,13 @@ function risolviEquazioneGradiMaggiori(equazione, grado, asse) {
 <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
 <td>`;
     code += toLatex(`${equazione.split('=')[1]} = 0`);
-
     code += `${toLatex(asse)}
 </td>`;
 
     switch (grado) {
         case 3:
+            const ruffini = scomponi(interpretaFunzione(equazione));
+            code += ruffini.code;
             break;
         case 4:
             break;
@@ -333,7 +411,7 @@ function risolviEquazione(equazione, grado, asse) {
                 code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
             <td>
-                ${toLatex('eq. imp. in R')}
+                ${toLatex('\\text{eq. imp. in } \\mathbb{R}')}
                 
                 ${toLatex(asse)}
             </td>`;
@@ -362,10 +440,10 @@ function risolviEquazione(equazione, grado, asse) {
                     for (let i = 0; i < 2; i++) {
                         code += `<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><img src="../images/parentesiGraffa.png" width=40 height=90></td>
-                        <td>
-                            ${toLatex('x_\{' + (i + 1) + '\} = ' + numeroRazionale(risultati[i]))}
-                            ${toLatex(asse)}
-                        </td>`;
+                        <td>`;
+                        code += toLatex('x_\{' + (i + 1) + '\} = ' + numeroRazionale(risultati[i]));
+                        code += toLatex(asse);
+                        code += `</td>`;
                         aggiungiPunto(risultati[i], 0);
                     }
                 }
@@ -383,7 +461,7 @@ function intersezioneAsse(funzione, asse) {
         x: 'y = 0',
         y: 'x = 0'
     };
-    let code = `<h6>Intersezione con l'asse ${asse}</h6>
+    let code = `<h6>${toLatex('\\text{Intersezione con l\'asse ' + asse + '}')}</h6>
 <table tborder=0>
     <tbody>
         <tr>
