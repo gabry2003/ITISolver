@@ -5,7 +5,7 @@ const path = require('path');
 let letteraAttuale;
 let puntiAttivi = [];
 
-String.prototype.isAlpha = function () {
+String.prototype.isAlpha = function() {
     return this.match('^[a-zA-Z\(\)]+$');
 };
 
@@ -19,7 +19,7 @@ $(document).ready(() => {
         $('[name="funzione"]').focus();
     }, 1200);
 
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         if ($(this).scrollTop() > 50) {
             $('#back-to-top').fadeIn();
         } else {
@@ -27,7 +27,7 @@ $(document).ready(() => {
         }
     });
 
-    $('#back-to-top').click(function () {
+    $('#back-to-top').click(function() {
         $('body,html').animate({
             scrollTop: 0
         }, 400);
@@ -44,6 +44,11 @@ function calcolaRisultato(funzione) {
     disegnaFunzione(funzione);
     $('#risultato').html(code);
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, '.content']);
+    setTimeout(() => {
+        Array.from(document.querySelectorAll('.MathJax_Display')).forEach(el => {
+            el.setAttribute('style', 'text-align: left;');
+        });
+    }, 500);
 };
 
 function pulisciPunti() {
@@ -54,6 +59,10 @@ function pulisciPunti() {
 
 function togliRisultato() {
     $('#div-risultato').css('display', 'none');
+    $('#scomposizione').css('display', 'none');
+    $('#equazioni-risolte').css('display', 'none');
+    $('#scomposizione').html('');
+    $('#equazioni-risolte').html('');
     pulisciPunti();
 }
 
