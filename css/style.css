@@ -90,3 +90,8 @@ td.graffa-sistema {
     border-image: url('../images/parentesiGraffa.png') 1 150 stretch;
     padding-left: 0.5em;
 }
+
+#grafico {
+    height: 600px;
+    width: 100%;
+}

@@ -1,74 +1,8 @@
 function disegnaFunzione(funzione) {
     try {
-        const expression = funzione.trim().replace('y=', '').replace('x=', '');
-        const expr = math.compile(expression);
-
-        let mathbox = mathBox({
-            element: document.querySelector('#grafico'),
-            plugins: ['core', 'controls', 'cursor', 'mathbox'],
-            controls: { klass: THREE.OrbitControls }
-        });
-        if (mathbox.fallback) throw 'WebGL not supported'
-
-        let three = mathbox.three;
-        three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
-
-        // 1. determine where the camera is looking at...
-
-        // setting proxy:true allows interactive controls to override base position
-        let camera = mathbox.camera({ proxy: true, position: [0, 0, 3] });
-
-        // 2. coordinate system that contains...
-
-        // save the view as a variable to simplify accessing it later
-        let view = mathbox.cartesian({
-            range: [
-                [-50, 50],
-                [-2, 2]
-            ],
-            scale: [1, 1]
-        });
-
-        // axes
-        let xAxis = view.axis({ axis: 1, width: 8, detail: 40, color: "red" });
-        let yAxis = view.axis({ axis: 2, width: 8, detail: 40, color: "green" });
-
-        // grid
-        let grid = view.grid({ width: 2, divideX: 20, divideY: 10, opacity: 0.25 });
-
-        // 3. geometric data represented via...
-
-        // the interval function will create a 1D array of data sampled between the view bounds
-        let graphData = view.interval({
-            expr: function(emit, x, i, t) {
-                emit(x, expr.evaluate({ x: x }));
-            },
-            // width is the number of data points to generate; higher numbers = higher resolution
-            width: 256,
-            // channels indicate the dimensionality of the output (set to 2 for a 2D graph)
-            channels: 2,
-        });
-
-        // 4. choice of shape to draw it as...
-
-        let graphView = view.line({ width: 4, color: "blue" });
-        view.point({ size: 6, color: "blue" });
-        /*// compile the expression once
-        // evaluate the expression repeatedly for different values of x
-        const xValues = math.range(-100, 100, 0.1).toArray();
-        const yValues = xValues.map(function(x) {
-            return expr.evaluate({ x: x })
-        });
-
-        // render the plot using plotly
-        const trace1 = {
-            x: xValues,
-            y: yValues,
-            type: 'scatter'
-        };
-
-        const data = [trace1];
-        Plotly.newPlot('grafico', data);*/
+        const url = `grafico.html?funzione=${encodeURIComponent(funzione)}&punti=${encodeURIComponent(JSON.stringify(puntiAttivi))}`;
+        console.log('url', url);
+        document.querySelector('#grafico').src = url;
     } catch (err) {
         console.error(err);
     }

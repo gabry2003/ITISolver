@@ -68,6 +68,10 @@ function togliRisultato() {
 
 function mostraRisultato() {
     $('#div-risultato').css('display', 'block');
+    /*// Scendo fino al sistema
+    $('html, body').animate({
+        scrollTop: $("#risultato").offset().top
+    }, 2000);*/
 }
 
 function aggiungiPunto(x, y) {
