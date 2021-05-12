@@ -103,4 +103,20 @@ class Funzione {
         // Ordino la funzione
         this.ordina();
     }
+
+    /**
+     * Metodo che stampa a schermo la funzione come stringa
+     * 
+     * @method
+     */
+    toString() {
+        let string;
+        this.termini.forEach(termine => {
+            string += termine.toString()
+        });
+        // Se il primo carattere è un +  lo rimuovo
+        if (string[0] == '+') string = string.substring(1);
+
+        return string;
+    }
 }

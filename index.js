@@ -14,7 +14,8 @@ const createWindow = () => {
             nodeIntegration: true,
             nodeIntegrationInWorker: true,
             contextIsolation: false,
-        }
+        },
+        icon: __dirname + '/images/icon.png'
     });
 
     win.setTitle(strings.app.nome);

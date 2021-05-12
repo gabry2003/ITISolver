@@ -16,7 +16,7 @@ class Termine {
         }
 
         // Se il primo carattere è un +
-        if (string[0] == '+') string = string.substring(1);
+        // if (string[0] == '+') string = string.substring(1);
 
         return string;
     }

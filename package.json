@@ -1,5 +1,5 @@
 {
-    "name": "intersezionicongliassi",
+    "name": "intersezionecongliassi",
     "version": "1.0.0",
     "description": "Programma che risolve le equazioni di ogni grado utilizzando Ruffini",
     "main": "index.js",
@@ -7,8 +7,26 @@
         "start": "electron .",
         "dev": "APP_DEV=true electron .",
         "pack": "electron-builder --dir",
-        "dist": "electron-builder --linux",
+        "dist": "electron-builder",
         "generate-docs": "./node_modules/.bin/jsdoc ./* -c ./jsdoc.json -d ./docs/it/ -R README.md --verbose --recurse"
+    },
+    "build": {
+        "win": {
+            "asar": true,
+            "icon": "images/icon.png",
+            "target": [
+                "msi"
+            ]
+        },
+        "linux": {
+            "asar": true,
+            "icon": "./build/icon.icns",
+            "target": [
+                "deb",
+                "rpm"
+            ],
+            "executableName": "Intersezione con gli assi"
+        }
     },
     "repository": {
         "type": "git",
@@ -19,7 +37,23 @@
         "math",
         "solver"
     ],
-    "author": "Gabriele Princiotta & Antonino Faraci",
+    "author": {
+        "name": "Gabriele Princiotta",
+        "email": "gabriprinciott@gmail.com",
+        "url": "https://gabriprinciott.it/"
+    },
+    "contributors": [
+        {
+            "name": "Gabriele Princiotta",
+            "email": "gabriprinciott@gmail.com",
+            "url": "https://gabriprinciott.it/"
+        },
+        {
+            "name": "Antonino Faraci",
+            "email": "antoninofaraci04@gmail.com",
+            "url": "http://antoninofaraci04.altervista.org/"
+        }
+    ],
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/gabry2003/IntersezioniConGliAssi/issues"

@@ -324,11 +324,19 @@ function scomponiConRuffini(funzione) {
             if (risultati[i] !== 0) { // Se il risultato non è zero
                 // Se il risultato è -1
                 if (risultati[i] == -1) {
-                    scomposta += '-';
+                    if(exp !== 0) {
+                        scomposta += '-';
+                    }else {
+                        scomposta += '-1';
+                    }
                 } else if (risultati[i] == 1) { // Se è 1
                     // Se non è il primo risultato
                     if (i > 0) {
-                        scomposta += '+';
+                        if(exp !== 0) {
+                            scomposta += '+';
+                        }else {
+                            scomposta += '+1';
+                        }
                     }
                 } else { // Altrimenti
                     if (risultati[i] > 0) scomposta += '+';
@@ -341,8 +349,8 @@ function scomponiConRuffini(funzione) {
                         scomposta += `x`;
                     }
                 }
-                exp--;
             }
+            exp--;
         }
         equazioneScomposta.push(scomposta);
 
