@@ -1,0 +1,44 @@
+.tabella-ruffini {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    margin-top: 15px;
+}
+
+.tabella-ruffini td {
+    width: 70px;
+    height: 70px;
+    margin: 0 !important;
+    text-align: center;
+    border: none;
+    float: none;
+}
+
+.tabella-ruffini td:first-child {
+    border-right: 1px solid #fff !important;
+}
+
+.tabella-ruffini td:last-child {
+    border-left: 1px solid #fff !important;
+}
+
+.tabella-ruffini tr.somme-ruffini {
+    border-top: 1px solid #fff;
+}
+
+td.spazio-sistema {
+    width: 50px;
+}
+
+td.graffa-sistema {
+    border-style: solid;
+    border-width: 1px 0 1px 20px;
+    border-image: url('../images/parentesiGraffa.png') 1 150 stretch;
+    padding-left: 0.5em;
+}
+
+#grafico {
+    height: 600px;
+    width: 100%;
+}

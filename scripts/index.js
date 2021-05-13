@@ -1,13 +1,24 @@
 const notifier = require('node-notifier');
-const { parse } = require('path');
 const path = require('path');
 
-let letteraAttuale;
-let puntiAttivi = [];
-
-String.prototype.isAlpha = function() {
-    return this.match('^[a-zA-Z\(\)]+$');
-};
+const mathsolver = new MathSolver({
+    elementi: {
+        listaPunti: document.querySelector('#lista-punti'),
+        passaggiScomposizione: document.querySelector('#scomposizione'),
+        equazioniRisolte: document.querySelector('#equazioni-risolte'),
+        risultato: document.querySelector('#div-risultato')
+    },
+    grafico: {
+        elemento: document.querySelector('#grafico'),
+        pagina: 'grafico.html',
+        punti: true,
+        asintoti: true,
+        direttrice: true,
+        vertice: true,
+        fuoco: true,
+        asse: true
+    }
+});
 
 $(document).ready(() => {
     setTimeout(() => {
@@ -36,13 +47,14 @@ $(document).ready(() => {
 });
 
 function calcolaRisultato(funzione) {
-    pulisciPunti();
+    mathsolver.pulisciPunti();
     let code = ``;
-    code += intersezioneAsse(funzione, 'y');
+    code += mathsolver.intersezioneAsse(funzione, 'y');
     code += `<br>`;
-    code += intersezioneAsse(funzione, 'x');
-    disegnaFunzione(funzione);
-    $('#risultato').html(code);
+    code += mathsolver.intersezioneAsse(funzione, 'x');
+    mathsolver.disegnaFunzione(funzione);
+    document.querySelector('#risultato').innerHTML = code;
+
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, '.content']);
     setTimeout(() => {
         Array.from(document.querySelectorAll('.MathJax_Display')).forEach(el => {
@@ -51,54 +63,13 @@ function calcolaRisultato(funzione) {
     }, 500);
 };
 
-function pulisciPunti() {
-    $('#lista-punti').html('');
-    letteraAttuale = null;
-    puntiAttivi.length = 0;
-}
-
-function togliRisultato() {
-    $('#div-risultato').css('display', 'none');
-    $('#scomposizione').css('display', 'none');
-    $('#equazioni-risolte').css('display', 'none');
-    $('#scomposizione').html('');
-    $('#equazioni-risolte').html('');
-    pulisciPunti();
-}
-
-function mostraRisultato() {
-    $('#div-risultato').css('display', 'block');
-    /*// Scendo fino al sistema
-    $('html, body').animate({
-        scrollTop: $("#risultato").offset().top
-    }, 2000);*/
-}
-
-function aggiungiPunto(x, y) {
-    if (puntiAttivi.filter(punto => punto.x == x && punto.y == y).length == 0) { // Se questo punto non esiste già
-        // Lo aggiungo
-        puntiAttivi.push({
-            x: x,
-            y: y
-        });
-
-        // Prendo la lettera successiva per dare il nome al punto
-        const nomePunto = letteraAttuale ? String.fromCharCode(letteraAttuale.charCodeAt(letteraAttuale.length - 1) + 1) : 'A';
-        letteraAttuale = nomePunto;
-        let code = `${$('#lista-punti').html()}<li style="list-style-type: none;">`;
-        code += toLatex(`${nomePunto}(${numeroRazionale(x)}, ${numeroRazionale(y)})`);
-        code += `</li>`;
-        $('#lista-punti').html(code);
-    }
-}
-
 $('#form-calcolo').on('submit', (e) => {
     e.preventDefault();
     let funzione = $('[name="funzione"]').val();
     if (funzione) { // Se l'utente ha inserito un'equazione valida
         funzione = funzione.replace(',', '.');
         calcolaRisultato(funzione);
-        mostraRisultato();
+        mathsolver.mostraRisultato();
     } else {
         notifier.notify({
             title: 'Errore',
@@ -110,5 +81,5 @@ $('#form-calcolo').on('submit', (e) => {
 });
 
 $('#form-calcolo').on('reset', (e) => {
-    togliRisultato();
+    mathsolver.togliRisultato();
 });
