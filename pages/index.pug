@@ -1,0 +1,99 @@
+doctype html
+head
+	meta(charset='UTF-8')
+	meta(name='viewport' content='width=device-width, initial-scale=1.0')
+	meta(name='author' content=strings.app.author)
+	title=strings.app.nome
+	link(rel='shortcut icon' href='../images/icon.png' type='image/x-icon')
+	link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==' crossorigin='anonymous')
+	link(rel='stylesheet' href='https://stemkoski.github.io/MathBox/mathbox.css')
+	link(rel='stylesheet' href='../css/bootstrap.min.css')
+	link(rel='stylesheet' href='../css/style.css')
+	link(rel='stylesheet' href='../css/mathsolver.min.css')
+body
+	img.loading(src='../images/icon.png' alt='')
+	#contenuto(style='display: none;')
+		.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
+			.container
+				a.navbar-brand(href='index.html')=strings.app.nome
+				button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+					span.navbar-toggler-icon
+				#navbarResponsive.collapse.navbar-collapse
+					ul.navbar-nav
+						each page in strings.menu
+							if page.subs !== undefined && page.subs !== null
+								li.nav-item.dropdown
+									a.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' id='menu-' + page.name)
+										| #{page.name}
+										span.caret
+									.dropdown-menu(aria-labelledby='menu-' + page.name)
+										each sub_page in page.subs
+											a.dropdown-item(href=sub_page.url)=sub_page.name
+							else
+								li.nav-item
+									a.nav-link(href=page.url)=page.name
+					ul.navbar-nav.ms-md-auto
+						each author in strings.app.authors
+							li.nav-item
+								a.nav-link(target='_blank' rel='noopener' href=author.website)
+									i.fab.fa-instagram
+									| &nbsp; #{author.name}
+		.content(style='margin-top: 100px;')
+			.container
+				.row
+					.col-md-12
+						.card
+							.card-body
+								form#form-calcolo.form-horizontal
+									.card.border-warning
+										.card-header GUIDA
+										.card-body(style='color: #000;')
+											ul
+												li
+													strong Inserisci una funzione di ogni grado
+												li
+													strong ^n
+													|  per inserire una potenza
+												li Inserisci prima il coefficiente e poi la parte letterale
+												li Per maggiori info. seguire l&apos;esempio iniziale
+									.form-group
+										h5.col-form-label.mt-4(for='funzione') Funzione
+										input.form-control(type='text' placeholder='y=x^3-7x-6' name='funzione' style='color: #444444;background-color:transparent;background:linear-gradient(125deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .2) 70%);')
+									#div-risultato.form-group(style='display: none;')
+										h5.col-form-label.mt-4 Punti
+										.card
+											.card-body
+												.card-body
+													ul#lista-punti(style='color: #000;')
+										br
+										h5.col-form-label.mt-4 Intersezione con gli assi
+										#scomposizione(style='display: none;')
+										#equazioni-risolte.row(style='display: none;')
+										.card
+											#risultato.card-body(style='color: #000;')
+										br
+										h5.col-form-label.mt-4 Grafico
+										.card
+											.card-body
+												iframe#grafico
+										br
+									br
+									.form-group
+										button.btn.btn-primary(type='submit') Calcola
+										button.btn.btn-secondary(type='reset') Pulisci
+			br
+			br
+	a#back-to-top.btn.btn-dark.btn-sm.back-to-top(href='#' role='button')
+		i.fas.fa-chevron-up
+	// Scripts
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous' onload='window.$ = window.jQuery = module.exports;')
+	script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js' integrity='sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p' crossorigin='anonymous')
+	script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js' integrity='sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT' crossorigin='anonymous')
+	script(src='https://unpkg.com/mathjs@9.3.2/lib/browser/math.js')
+	script(src='https://cdn.plot.ly/plotly-1.35.2.min.js')
+	script(src='https://polyfill.io/v3/polyfill.min.js?features=es6')
+	script(src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML')
+	script(src='https://stemkoski.github.io/MathBox/mathbox-bundle.js')
+	script(src='../scripts/mathsolver.min.js')
+	script(src='../scripts/main.js')
+	script(src='../scripts/index.js')

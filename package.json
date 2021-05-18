@@ -1,13 +1,14 @@
 {
-    "name": "intersezionecongliassi",
+    "name": "itisolver",
     "version": "1.0.0",
-    "description": "Programma che risolve le equazioni di ogni grado utilizzando Ruffini",
+    "description": "Programma che risolve le equazioni di ogni grado, le scompone e risolve altri problemi matematici con tutti i passaggi",
     "main": "index.js",
     "scripts": {
-        "start": "electron .",
-        "dev": "APP_DEV=true electron .",
+        "compile": "./node_modules/.bin/tsc",
+        "start": "npm run compile && electron js/index.js",
+        "dev": "APP_DEV=true npm start",
         "pack": "electron-builder --dir",
-        "dist": "electron-builder",
+        "dist": "npm run compile && electron-builder",
         "generate-docs": "./node_modules/.bin/jsdoc ./* -c ./jsdoc.json -d ./docs/it/ -R README.md --verbose --recurse"
     },
     "build": {
@@ -25,12 +26,12 @@
                 "deb",
                 "rpm"
             ],
-            "executableName": "Intersezione con gli assi"
+            "executableName": "ITISolver"
         }
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/gabry2003/IntersezioniConGliAssi.git"
+        "url": "git+https://github.com/gabry2003/ITISolver.git"
     },
     "keywords": [
         "ruffini",
@@ -42,8 +43,7 @@
         "email": "gabriprinciott@gmail.com",
         "url": "https://gabriprinciott.it/"
     },
-    "contributors": [
-        {
+    "contributors": [{
             "name": "Gabriele Princiotta",
             "email": "gabriprinciott@gmail.com",
             "url": "https://gabriprinciott.it/"
@@ -60,14 +60,23 @@
     },
     "homepage": "https://github.com/gabry2003/IntersezioniConGliAssi#readme",
     "devDependencies": {
-        "electron": "^12.0.6"
+        "@types/electron": "^1.6.10",
+        "@types/jquery": "^3.5.5",
+        "@types/node": "^15.3.0",
+        "electron": "^12.0.6",
+        "typescript": "^4.2.4"
     },
     "dependencies": {
         "clean-jsdoc-theme": "^3.2.7",
+        "console-error": "0.0.4",
         "electron-reload": "^1.5.0",
+        "electron-settings": "^4.0.2",
         "jsdoc": "^3.6.6",
+        "minami": "^1.2.3",
         "node-notifier": "^9.0.1",
         "path": "^0.12.7",
-        "upath": "^2.0.1"
+        "pug": "^3.0.2",
+        "upath": "^2.0.1",
+        "url": "^0.11.0"
     }
 }

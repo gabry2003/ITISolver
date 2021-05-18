@@ -20,32 +20,6 @@ const mathsolver = new MathSolver({
     }
 });
 
-$(document).ready(() => {
-    setTimeout(() => {
-        $('img.loading').fadeOut(500);
-        $('#contenuto').fadeIn(500);
-    }, 500);
-
-    setTimeout(() => {
-        $('[name="funzione"]').focus();
-    }, 1200);
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 50) {
-            $('#back-to-top').fadeIn();
-        } else {
-            $('#back-to-top').fadeOut();
-        }
-    });
-
-    $('#back-to-top').click(function() {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 400);
-        return false;
-    });
-});
-
 function calcolaRisultato(funzione) {
     mathsolver.pulisciPunti();
     let code = ``;
@@ -63,7 +37,7 @@ function calcolaRisultato(funzione) {
     }, 500);
 };
 
-$('#form-calcolo').on('submit', (e) => {
+$('#form-calcolo').on('submit', e => {
     e.preventDefault();
     let funzione = $('[name="funzione"]').val();
     if (funzione) { // Se l'utente ha inserito un'equazione valida
@@ -80,6 +54,6 @@ $('#form-calcolo').on('submit', (e) => {
     }
 });
 
-$('#form-calcolo').on('reset', (e) => {
+$('#form-calcolo').on('reset', e => {
     mathsolver.togliRisultato();
 });
