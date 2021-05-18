@@ -52,7 +52,7 @@ function calcolaRisultato(funzione) {
     code += mathsolver.intersezioneAsse(funzione, 'y');
     code += `<br>`;
     code += mathsolver.intersezioneAsse(funzione, 'x');
-    mathsolver.disegnaFunzione(funzione);
+    mathsolver.disegnaFunzione(funzione, mathsolver.puntiAttivi);
     document.querySelector('#risultato').innerHTML = code;
 
     MathJax.Hub.Queue(['Typeset', MathJax.Hub, '.content']);
