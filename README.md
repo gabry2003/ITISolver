@@ -7,9 +7,19 @@ Hai bisogno di un software che data una funzione matematica come input ti dia l'
 - npm 6.14.4
 - yarn 1.21.1
 
+### Pulizia progetto
+``` bash
+npm run clean
+```
+
 ### Installazione dipendenze
 ``` bash
 npm install
+```
+
+### Compilazione Javascript
+``` bash
+npm run compile
 ```
 
 ### Start

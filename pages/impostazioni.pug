@@ -15,7 +15,7 @@ body
     #contenuto(style='display: none;')
         .navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
             .container
-                a.navbar-brand(href='index.html') ITISolver
+                a.navbar-brand(href='index.pug')=strings.app.nome
                 button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
                     span.navbar-toggler-icon
                 #navbarResponsive.collapse.navbar-collapse
@@ -57,31 +57,34 @@ body
                                             input#tipologiaFunzione.form-check-input(type='checkbox')
                                             label.form-check-label(for='tipologiaFunzione') Tipologia funzione
                                         .form-check
-                                            input#condizioneDiEsistenzaFunzione.form-check-input(type='checkbox')
-                                            label.form-check-label(for='condizioneDiEsistenzaFunzione') Condizione di esistenza
-                                        .form-check
-                                            input#positivitaENegativitaFunzione.form-check-input(type='checkbox')
-                                            label.form-check-label(for='positivitaENegativitaFunzione') Positivit&agrave; e negativit&agrave;
-                                        .form-check
-                                            input#massimiEMinimiFunzione.form-check-input(type='checkbox')
-                                            label.form-check-label(for='massimiEMinimiFunzione') Massimi e minimi
-                                        .form-check
-                                            input#pariEDispariFunzione.form-check-input(type='checkbox')
-                                            label.form-check-label(for='pariEDispariFunzione') Pari e dispari
-                                    fieldset.form-group
-                                        legend.mt-4(style='font-size: 100%;') Parabola
-                                        .form-check
-                                            input#verticeParabola.form-check-input(type='checkbox')
-                                            label.form-check-label(for='verticeParabola') Vertice
-                                        .form-check
-                                            input#fuocoParabola.form-check-input(type='checkbox')
-                                            label.form-check-label(for='fuocoParabola') Fuoco
-                                        .form-check
-                                            input#direttriceParabola.form-check-input(type='checkbox')
-                                            label.form-check-label(for='direttriceParabola') Direttrice
-                                        .form-check
-                                            input#asseDiSimmetriaParabola.form-check-input(type='checkbox')
-                                            label.form-check-label(for='asseDiSimmetriaParabola') Asse di simmetria
+                                            input#tangenteAdUnaCurva.form-check-input(type='checkbox')
+                                            label.form-check-label(for='tangenteAdUnaCurva') Tangente ad una curva
+                                        //- .form-check
+                                        //-     input#condizioneDiEsistenzaFunzione.form-check-input(type='checkbox')
+                                        //-     label.form-check-label(for='condizioneDiEsistenzaFunzione') Condizione di esistenza
+                                        //- .form-check
+                                        //-     input#positivitaENegativitaFunzione.form-check-input(type='checkbox')
+                                        //-     label.form-check-label(for='positivitaENegativitaFunzione') Positivit&agrave; e negativit&agrave;
+                                        //- .form-check
+                                        //-     input#massimiEMinimiFunzione.form-check-input(type='checkbox')
+                                        //-     label.form-check-label(for='massimiEMinimiFunzione') Massimi e minimi
+                                        //- .form-check
+                                        //-     input#pariEDispariFunzione.form-check-input(type='checkbox')
+                                        //-     label.form-check-label(for='pariEDispariFunzione') Pari e dispari
+                                    //- fieldset.form-group
+                                    //-     legend.mt-4(style='font-size: 100%;') Parabola
+                                    //-     .form-check
+                                    //-         input#verticeParabola.form-check-input(type='checkbox')
+                                    //-         label.form-check-label(for='verticeParabola') Vertice
+                                    //-     .form-check
+                                    //-         input#fuocoParabola.form-check-input(type='checkbox')
+                                    //-         label.form-check-label(for='fuocoParabola') Fuoco
+                                    //-     .form-check
+                                    //-         input#direttriceParabola.form-check-input(type='checkbox')
+                                    //-         label.form-check-label(for='direttriceParabola') Direttrice
+                                    //-     .form-check
+                                    //-         input#asseDiSimmetriaParabola.form-check-input(type='checkbox')
+                                    //-         label.form-check-label(for='asseDiSimmetriaParabola') Asse di simmetria
                                     //- fieldset.form-group
                                     //-   legend.mt-4(style='font-size: 100%;') Circonferenza
                                     //-   .form-check
@@ -93,12 +96,12 @@ body
                                     //-   .form-check
                                     //-     input#diametroCirconferenza.form-check-input(type='checkbox')
                                     //-     label.form-check-label(for='diametroCirconferenza') Diametro
-                                    fieldset.form-group
-                                        legend.mt-4(style='font-size: 100%;') Scomposizione
-                                        .form-check
-                                            input#utilizzaSempreRuffini.form-check-input(type='checkbox')
-                                            label.form-check-label(for='utilizzaSempreRuffini') Utilizza sempre Ruffini
-                                    br
+                                    //- fieldset.form-group
+                                    //-     legend.mt-4(style='font-size: 100%;') Scomposizione
+                                    //-     .form-check
+                                    //-         input#utilizzaSempreRuffini.form-check-input(type='checkbox')
+                                    //-         label.form-check-label(for='utilizzaSempreRuffini') Utilizza sempre Ruffini
+                                    //- br
                                     .form-group
                                         button.btn.btn-primary(type='submit') Salva
             br
@@ -116,4 +119,4 @@ body
     script(src='https://stemkoski.github.io/MathBox/mathbox-bundle.js')
     script(src='../scripts/mathsolver.min.js')
     script(src='../scripts/main.js')
-    script(src='../js/scripts/impostazioni.js')
+    script(src='../scripts/impostazioni.js')

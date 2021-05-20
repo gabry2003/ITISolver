@@ -1,6 +1,6 @@
 const strings = {
     "app": {
-        "nome": "Intersezione con gli assi",
+        "nome": "ITISolver",
         "author": "Gabriele Princiotta & Antonino Faraci",
         "authors": [{
                 "name": "Gabriele Princiotta",
@@ -20,7 +20,7 @@ const strings = {
                     "name": "Studio funzione",
                     "url": "index.pug"
                 },
-                {
+                /*{
                     "name": "Soluzione equazione",
                     "url": "soluzione-equazione.pug"
                 },
@@ -31,7 +31,7 @@ const strings = {
                 {
                     "name": "Grafico funzione",
                     "url": "grafico-funzione.pug"
-                }
+                }*/
             ]
         },
         {

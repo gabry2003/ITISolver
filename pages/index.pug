@@ -15,7 +15,7 @@ body
 	#contenuto(style='display: none;')
 		.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
 			.container
-				a.navbar-brand(href='index.html')=strings.app.nome
+				a.navbar-brand(href='index.pug')=strings.app.nome
 				button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
 					span.navbar-toggler-icon
 				#navbarResponsive.collapse.navbar-collapse
@@ -45,7 +45,7 @@ body
 						.card
 							.card-body
 								form#form-calcolo.form-horizontal
-									.card.border-warning
+									.card.border-secondary
 										.card-header GUIDA
 										.card-body(style='color: #000;')
 											ul
@@ -55,10 +55,10 @@ body
 													strong ^n
 													|  per inserire una potenza
 												li Inserisci prima il coefficiente e poi la parte letterale
-												li Per maggiori info. seguire l&apos;esempio iniziale
 									.form-group
-										h5.col-form-label.mt-4(for='funzione') Funzione
-										input.form-control(type='text' placeholder='y=x^3-7x-6' name='funzione' style='color: #444444;background-color:transparent;background:linear-gradient(125deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .2) 70%);')
+										math-field(virtual-keyboard-mode='manual' id='funzione' locale='it' smart-mode style='font-size: 22px;margin: 1em;padding: 8px;border-radius: 8px; border: 1px solid rgba(0, 0, 0, .3);box-shadow: 0 0 8px rgba(0, 0, 0, .2);')
+											| y=x^3-7x-6
+									#descrizione-funzione
 									#div-risultato.form-group(style='display: none;')
 										h5.col-form-label.mt-4 Punti
 										.card
@@ -94,6 +94,8 @@ body
 	script(src='https://polyfill.io/v3/polyfill.min.js?features=es6')
 	script(src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML')
 	script(src='https://stemkoski.github.io/MathBox/mathbox-bundle.js')
+	script(src='https://unpkg.com/mathlive/dist/mathlive.min.js')
+	script(src='https://cdn.jsdelivr.net/npm/bootstrap-4-autocomplete/dist/bootstrap-4-autocomplete.min.js' crossorigin='anonymous')
 	script(src='../scripts/mathsolver.min.js')
 	script(src='../scripts/main.js')
 	script(src='../scripts/index.js')

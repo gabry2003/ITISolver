@@ -1,8 +1,7 @@
 import { BrowserWindow } from 'electron';
-import * as setupPug from 'electron-pug';
-import * as path from 'path';
+import setupPug from 'electron-pug';
 import strings from './utils/strings';
-import * as upath from 'upath';
+import upath from 'upath';
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
@@ -13,11 +12,6 @@ export default class Main {
         if (process.platform !== 'darwin') {
             Main.application.quit();
         }
-    }
-
-    private static onClose() {
-        // Dereference the window object. 
-        Main.mainWindow = null;
     }
 
     private static createWindow() {
