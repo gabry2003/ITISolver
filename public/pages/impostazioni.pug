@@ -4,14 +4,14 @@ head
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     meta(name='author' content=strings.app.author)
     title Impostazioni
-    link(rel='shortcut icon' href='../images/icon.png' type='image/x-icon')
+    link(rel='shortcut icon' href='../assets/images/icon.png' type='image/x-icon')
     link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==' crossorigin='anonymous')
     link(rel='stylesheet' href='https://stemkoski.github.io/MathBox/mathbox.css')
-    link(rel='stylesheet' href='../css/bootstrap.min.css')
-    link(rel='stylesheet' href='../css/style.css')
-    link(rel='stylesheet' href='../css/mathsolver.min.css')
+    link(rel='stylesheet' href='../assets/css/bootstrap.min.css')
+    link(rel='stylesheet' href='../assets/css/style.css')
+    link(rel='stylesheet' href='../assets/css/mathsolver.min.css')
 body
-    img.loading(src='../images/icon.png' alt='')
+    img.loading(src='../assets/images/icon.png' alt='')
     #contenuto(style='display: none;')
         .navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
             .container
@@ -116,7 +116,7 @@ body
     script(src='https://cdn.plot.ly/plotly-1.35.2.min.js')
     script(src='https://polyfill.io/v3/polyfill.min.js?features=es6')
     script(src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML')
-    script(src='https://stemkoski.github.io/MathBox/mathbox-bundle.js')
-    script(src='../scripts/mathsolver.min.js')
-    script(src='../scripts/main.js')
-    script(src='../scripts/impostazioni.js')
+    script(src='https:scripts//stemkoski.github.io/MathBox/mathbox-bundle.js')
+    include ./includes/scripts.pug
+    script
+        | let impostazioni = require('../../dist/modules/impostazioni/index.js');

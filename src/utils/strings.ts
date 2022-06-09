@@ -21,6 +21,10 @@ const strings = {
                     "url": "index.pug"
                 },
                 /*{
+                    "name": "Concetto derivata",
+                    "url": "concetto-derivata.pug"
+                },
+                {
                     "name": "Soluzione equazione",
                     "url": "soluzione-equazione.pug"
                 },

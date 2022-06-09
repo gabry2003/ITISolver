@@ -1,6 +1,7 @@
-const notifier = require('node-notifier');
-const path = require('path');
-const DbManager = require('../db-manager');
+import path from 'path';
+import notifier from 'node-notifier';
+import { derivata, Funzione, MathSolver } from '@evolvementdev/mathsolver';
+import { DbManager } from '../../db-manager';
 
 const mathsolver = new MathSolver({
     elementi: {
@@ -10,7 +11,7 @@ const mathsolver = new MathSolver({
         risultato: '#div-risultato'
     },
     grafico: {
-        elemento: document.querySelector('#grafico'),
+        elemento: document.querySelector('#grafico') as HTMLIFrameElement,
         pagina: 'grafico.html',
         punti: true,
         asintoti: true,
@@ -24,16 +25,17 @@ const mathsolver = new MathSolver({
 /**
  * Questa funzione fa partire lo studio della funzione presa in input
  * 
- * @param {string} funzione Funzione da studiare
- * @param {string} parlato Funzione letta in italiano
+ * @param funzione Funzione da studiare
+ * @param parlato Funzione letta in italiano
  */
-function calcolaRisultato(funzione, parlato) {
+export function calcolaRisultato(funzione: string, parlato: string) {
     // Salvo la funzione nella cronologia
-    DbManager.db.get('cronologia').push({
+    DbManager.instance.db.get('cronologia').push({
         dati: funzione,
         tipo: 'studioFunzione',
         momento: Date.now()
-    }).save();
+    });
+    DbManager.instance.db.save();
 
 
     if ('speechSynthesis' in window) {
@@ -62,14 +64,17 @@ function calcolaRisultato(funzione, parlato) {
     mathsolver.pulisciPunti();
 
     let obj = new Funzione(funzione);
-    let coefficienteAngolare = obj.coefficienteAngolare();
+    let coefficienteAngolare = obj.coefficienteAngolare;
+    const tipologia = obj.tipologia;
 
     let code = ``;
     let descrizioneFunzione = ``;
 
-    if (DbManager.db.get('impostazioni.tipologiaFunzione')) { // Se devo dire la tipologia di funzione
-        descrizioneFunzione += mathsolver.toLatex(`\\text${obj.tipologia()}`);
+    if (DbManager.instance.db.get('impostazioni.tipologiaFunzione') && tipologia) { // Se devo dire la tipologia di funzione
+        descrizioneFunzione += mathsolver.toLatex(`\\text{${tipologia}}`);
     }
+
+    //$('#derivata-funzione').html(mathsolver.toLatex(`${derivata(obj)}`));
 
     if (coefficienteAngolare) {
         descrizioneFunzione += mathsolver.toLatex(`\\text{Coefficiente angolare: ${coefficienteAngolare.numero.toFixed(2)} (${coefficienteAngolare.gradi.toFixed(2)}°)}`);
@@ -89,20 +94,23 @@ function calcolaRisultato(funzione, parlato) {
     $('#descrizione-funzione').html(descrizioneFunzione);
 
     // Se devo fare l'intersezione con gli assi
-    if (DbManager.db.get('impostazioni.intersezioneConGliAssi').value()) {
+    if (DbManager.instance.db.get('impostazioni.intersezioneConGliAssi').value()) {
         code += mathsolver.intersezioneAsse(funzione, 'y');
         code += `<br>`;
         code += mathsolver.intersezioneAsse(funzione, 'x');
     }
 
     mathsolver.disegnaFunzione(funzione, mathsolver.puntiAttivi);
-    document.querySelector('#risultato').innerHTML = code;
 
-    MathJax.Hub.Queue(['Typeset', MathJax.Hub, '.content']);
+    const risultatoEl = document.querySelector('#risultato');
+    if(risultatoEl) {
+        risultatoEl.innerHTML = code;
+    }
+
     setTimeout(() => {
         // Sposto a sinistra il testo di mathjax, che non sia la lista dei punti e la descrizione della funzione
         Array.from(document.querySelectorAll('.MathJax_Display')).forEach(el => {
-            if (el.parentElement.parentElement.id !== 'lista-punti' && el.parentElement.id !== 'descrizione-funzione') {
+            if (el.parentElement?.parentElement?.id !== 'lista-punti' && el.parentElement?.id !== 'descrizione-funzione') {
                 el.setAttribute('style', 'text-align: left;');
             }
         });
@@ -113,15 +121,16 @@ $('#form-calcolo').on('submit', e => {
     e.preventDefault();
     let funzione = $('#funzione').val();
     if (funzione) { // Se l'utente ha inserito un'equazione valida
-        const parlato = document.getElementById('funzione').getValue('spoken-text');
-        funzione = funzione.replace(',', '.');
+        const parlato = (document.getElementById('funzione') as any)?.getValue('spoken-text');
+        funzione = funzione.toString().replace(',', '.');
         calcolaRisultato(funzione, parlato);
         mathsolver.mostraRisultato();
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, '.content']);
     } else {
         notifier.notify({
             title: 'Errore',
             message: `Inserisci una funzione valida!`,
-            icon: path.join(__dirname, '../images/icon.png'),
+            icon: path.join(__dirname, '../../../assets/images/icon.png'),
             sound: true
         });
     }
@@ -129,4 +138,6 @@ $('#form-calcolo').on('submit', e => {
 
 $('#form-calcolo').on('reset', e => {
     mathsolver.togliRisultato();
+    $('#derivata-funzione').html('');
+    $('#descrizione-funzione').html('');
 });
