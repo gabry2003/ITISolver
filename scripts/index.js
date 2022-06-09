@@ -68,7 +68,7 @@ function calcolaRisultato(funzione, parlato) {
     let descrizioneFunzione = ``;
 
     if (DbManager.db.get('impostazioni.tipologiaFunzione')) { // Se devo dire la tipologia di funzione
-        descrizioneFunzione += mathsolver.toLatex(`\\text${obj.tipologia()}`);
+        descrizioneFunzione += mathsolver.toLatex(`\\text{${obj.tipologia()}}`);
     }
 
     if (coefficienteAngolare) {
@@ -93,6 +93,9 @@ function calcolaRisultato(funzione, parlato) {
         code += mathsolver.intersezioneAsse(funzione, 'y');
         code += `<br>`;
         code += mathsolver.intersezioneAsse(funzione, 'x');
+        
+        $('#area-asse-x').css('display', 'block');
+        $('#area-asse-x').html(mathsolver.areaFunzione(obj, mathsolver.puntiAsse('x')));
     }
 
     mathsolver.disegnaFunzione(funzione, mathsolver.puntiAttivi);
