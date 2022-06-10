@@ -88,6 +88,8 @@ function calcolaRisultato(funzione, parlato) {
 
     $('#descrizione-funzione').css('display', 'block');
     $('#descrizione-funzione').html(descrizioneFunzione);
+    $('#funzione-pari-o-dispari').css('display', 'block');
+    $('#funzione-pari-o-dispari').html(mathsolver.funzionePariODispari(obj));
     $('#dominio-funzione').css('display', 'block');
     $('#dominio-funzione').html(mathsolver.toLatex(`C.E. = ${obj.dominio()}`));
 
@@ -146,4 +148,5 @@ $('#form-calcolo').on('reset', e => {
     $('#area-asse-x').css('display', 'none');
     $('#area-asse-y').css('display', 'none');
     $('#positivita-e-negativita').css('display', 'none');
+    $('#funzione-pari-o-dispari').css('display', 'none');
 });
