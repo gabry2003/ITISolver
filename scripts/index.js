@@ -86,16 +86,25 @@ function calcolaRisultato(funzione, parlato) {
         }
     }
 
+    $('#descrizione-funzione').css('display', 'block');
     $('#descrizione-funzione').html(descrizioneFunzione);
+    $('#dominio-funzione').css('display', 'block');
+    $('#dominio-funzione').html(mathsolver.toLatex(`C.E. = ${obj.dominio()}`));
 
     // Se devo fare l'intersezione con gli assi
     if (DbManager.db.get('impostazioni.intersezioneConGliAssi').value()) {
         code += mathsolver.intersezioneAsse(funzione, 'y');
         code += `<br>`;
         code += mathsolver.intersezioneAsse(funzione, 'x');
+
+        $('#positivita-e-negativita').css('display', 'block');
+        $('#positivita-e-negativita').html(mathsolver.positivitaENegativita(obj));
         
         $('#area-asse-x').css('display', 'block');
         $('#area-asse-x').html(mathsolver.areaFunzione(obj, mathsolver.puntiAsse('x')));
+
+        $('#area-asse-y').css('display', 'block');
+        $('#area-asse-y').html(mathsolver.areaFunzione(obj, mathsolver.puntiAsse('y')));
     }
 
     mathsolver.disegnaFunzione(funzione, mathsolver.puntiAttivi);
@@ -132,4 +141,9 @@ $('#form-calcolo').on('submit', e => {
 
 $('#form-calcolo').on('reset', e => {
     mathsolver.togliRisultato();
+    $('#descrizione-funzione').css('display', 'none');
+    $('#dominio-funzione').css('display', 'none');
+    $('#area-asse-x').css('display', 'none');
+    $('#area-asse-y').css('display', 'none');
+    $('#positivita-e-negativita').css('display', 'none');
 });

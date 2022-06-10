@@ -58,7 +58,8 @@ body
 									.form-group
 										math-field(virtual-keyboard-mode='manual' id='funzione' locale='it' smart-mode style='font-size: 22px;margin: 1em;padding: 8px;border-radius: 8px; border: 1px solid rgba(0, 0, 0, .3);box-shadow: 0 0 8px rgba(0, 0, 0, .2);')
 											| y=x^3-7x-6
-									#descrizione-funzione
+									#descrizione-funzione(style="display: none;")
+									#dominio-funzione(style="display: none;")
 									#div-risultato.form-group(style='display: none;')
 										h5.col-form-label.mt-4 Punti
 										.card
@@ -72,8 +73,14 @@ body
 										.card
 											#risultato.card-body(style='color: #000;')
 										br
+										h5.col-form-label.mt-4 Positività e negatività
+										#positivita-e-negativita(style='display: none;')
+										br
 										h5.col-form-label.mt-4 Area int. con asse x
 										#area-asse-x(style='display: none;')
+										br
+										h5.col-form-label.mt-4 Area int. con asse y
+										#area-asse-y(style='display: none;')
 										br
 										h5.col-form-label.mt-4 Grafico
 										.card

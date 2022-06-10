@@ -15,6 +15,57 @@
     float: none;
 }
 
+.tabella-disequazione td, .tabella-disequazione th {
+    margin: 0 !important;
+    width: 100px !important;
+}
+
+.tabella-disequazione th {
+    height: 50px !important;
+}
+
+.tabella-disequazione th {
+    border-bottom: 2px solid #000 !important;
+}
+
+.tabella-disequazione th:last-child {
+    border-bottom: 2px dotted #000 !important;
+}
+
+.tabella-disequazione th.th-numero {
+    padding: 0 !important;
+}
+
+.tabella-disequazione th.th-numero .MathJax_Display {
+    text-align: left !important;
+}
+
+.tabella-disequazione td.td-border-left {
+    border-left: 2px dotted #000;
+}
+
+.circle {
+    display:block;
+    height:50px;
+    width:50px;
+    border-radius:50%;
+    border:5px solid #000;
+    margin:auto;
+    color:#fff;
+    line-height:40px;
+    text-align:center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.circle-positive {
+    background-color:#61A946;
+}
+
+.circle-negative {
+    background-color:#DD4B44;
+}
+
 .tabella-ruffini td:first-child {
     border-right: 1px solid #fff !important;
 }
