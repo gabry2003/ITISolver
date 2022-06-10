@@ -112,6 +112,9 @@ function calcolaRisultato(funzione, parlato) {
   $("#crescenza-e-decrescenza").css("display", "block");
   $("#crescenza-e-decrescenza").html(mathsolver.crescenzaEDecrescenza(obj));
 
+  $("#concavita").css("display", "block");
+  $("#concavita").html(mathsolver.concavitaFunzione(obj));
+
   // Se devo fare l'intersezione con gli assi
   if (DbManager.db.get("impostazioni.intersezioneConGliAssi").value()) {
     code += mathsolver.intersezioneAsse(funzione, "y");
@@ -174,4 +177,5 @@ $("#form-calcolo").on("reset", (e) => {
   $("#positivita-e-negativita").css("display", "none");
   $("#funzione-pari-o-dispari").css("display", "none");
   $("#crescenza-e-decrescenza").css("display", "none");
+  $("#concavita").css("display", "none");
 });
