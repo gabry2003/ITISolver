@@ -64,6 +64,7 @@ function calcolaRisultato(funzione, parlato) {
   mathsolver.pulisciPunti();
 
   let obj = new Funzione(funzione);
+  const funzioniAggiuntive = mathsolver.aggiunteSpecifiche(obj);
   let coefficienteAngolare = obj.coefficienteAngolare();
 
   let code = ``;
@@ -132,10 +133,17 @@ function calcolaRisultato(funzione, parlato) {
     );
   }
 
-  mathsolver.disegnaFunzione(funzione, mathsolver.puntiAttivi);
+  mathsolver.disegnaFunzione(
+    [funzione, ...funzioniAggiuntive],
+    mathsolver.puntiAttivi
+  );
   document.querySelector("#risultato").innerHTML = code;
 
   MathJax.Hub.Queue(["Typeset", MathJax.Hub, ".content"]);
+  MathJax.Hub.Config({
+    jax: ["input/TeX", "output/HTML-CSS"],
+    displayAlign: "center",
+  });
   setTimeout(() => {
     // Sposto a sinistra il testo di mathjax, che non sia la lista dei punti e la descrizione della funzione
     Array.from(document.querySelectorAll(".MathJax_Display")).forEach((el) => {

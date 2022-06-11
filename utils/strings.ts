@@ -7,11 +7,11 @@ const strings = {
                 "github": "https://github.com/gabry2003/",
                 "website": "https://gabriprinciott.it"
             },
-            {
-                "name": "Antonino Faraci",
-                "github": "https://github.com/Anto-2004/",
-                "website": "http://antoninofaraci.herokuapp.com"
-            }
+            // {
+            //     "name": "Antonino Faraci",
+            //     "github": "https://github.com/Anto-2004/",
+            //     "website": "http://antoninofaraci.herokuapp.com"
+            // }
         ]
     },
     "menu": [{
