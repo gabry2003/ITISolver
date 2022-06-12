@@ -144,6 +144,9 @@ function calcolaRisultato(funzione, parlato) {
     jax: ["input/TeX", "output/HTML-CSS"],
     displayAlign: "center",
   });
+  $(".my-tooltip").tooltip({
+    placement: "top",
+  });
   setTimeout(() => {
     // Sposto a sinistra il testo di mathjax, che non sia la lista dei punti e la descrizione della funzione
     Array.from(document.querySelectorAll(".MathJax_Display")).forEach((el) => {
@@ -156,6 +159,12 @@ function calcolaRisultato(funzione, parlato) {
     });
   }, 500);
 }
+
+$(document).ready(function() {
+  $(".my-tooltip").tooltip({
+    placement: "top",
+  });
+});
 
 $("#form-calcolo").on("submit", (e) => {
   e.preventDefault();

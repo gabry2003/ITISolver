@@ -29,6 +29,8 @@ export default class Main {
 
         Main.mainWindow.setTitle(strings.app.nome);
         Main.mainWindow.maximize();
+        // TODO: Da togliere
+        Main.mainWindow.webContents.openDevTools();
         Main.mainWindow.loadFile('../pages/index.pug');
     }
 

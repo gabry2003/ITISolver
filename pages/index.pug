@@ -79,8 +79,10 @@ body
 										h5.col-form-label.mt-4 Concavità
 										#concavita(style='display: none;')
 										br
-										h5.col-form-label.mt-4 Intersezione con gli assi
+										h5.col-form-label.mt-4 Scomposizioni
 										#scomposizione(style='display: none;')
+										br
+										h5.col-form-label.mt-4 Intersezione con gli assi
 										#equazioni-risolte.row(style='display: none;')
 										.card
 											#risultato.card-body(style='color: #000;')
@@ -98,8 +100,8 @@ body
 										br
 									br
 									.form-group
-										button.btn.btn-primary(type='submit') Calcola
-										button.btn.btn-secondary(type='reset') Pulisci
+										button.btn.btn-primary.my-tooltip(title='Clicca qui per studiare la funzione' type='submit') Calcola
+										button.btn.btn-secondary.my-tooltip(title='Clicca qui per pulire lo schermo' type='reset') Pulisci
 			br
 			br
 	a#back-to-top.btn.btn-dark.btn-sm.back-to-top(href='#' role='button')
