@@ -126,11 +126,6 @@ function calcolaRisultato(funzione, parlato) {
     $("#area-asse-x").html(
       mathsolver.areaFunzione(obj, mathsolver.puntiAsse("x"))
     );
-
-    $("#area-asse-y").css("display", "block");
-    $("#area-asse-y").html(
-      mathsolver.areaFunzione(obj, mathsolver.puntiAsse("y"))
-    );
   }
 
   mathsolver.disegnaFunzione(
@@ -147,17 +142,17 @@ function calcolaRisultato(funzione, parlato) {
   $(".my-tooltip").tooltip({
     placement: "top",
   });
-  setTimeout(() => {
-    // Sposto a sinistra il testo di mathjax, che non sia la lista dei punti e la descrizione della funzione
-    Array.from(document.querySelectorAll(".MathJax_Display")).forEach((el) => {
-      if (
-        el.parentElement.parentElement.id !== "lista-punti" &&
-        el.parentElement.id !== "descrizione-funzione"
-      ) {
-        el.setAttribute("style", "text-align: left;");
-      }
-    });
-  }, 500);
+  // setTimeout(() => {
+  //   // Sposto a sinistra il testo di mathjax, che non sia la lista dei punti e la descrizione della funzione
+  //   Array.from(document.querySelectorAll(".MathJax_Display")).forEach((el) => {
+  //     if (
+  //       el.parentElement.parentElement.id !== "lista-punti" &&
+  //       el.parentElement.id !== "descrizione-funzione"
+  //     ) {
+  //       el.setAttribute("style", "text-align: left;");
+  //     }
+  //   });
+  // }, 500);
 }
 
 $(document).ready(function() {
@@ -190,7 +185,6 @@ $("#form-calcolo").on("reset", (e) => {
   $("#descrizione-funzione").css("display", "none");
   $("#dominio-funzione").css("display", "none");
   $("#area-asse-x").css("display", "none");
-  $("#area-asse-y").css("display", "none");
   $("#positivita-e-negativita").css("display", "none");
   $("#funzione-pari-o-dispari").css("display", "none");
   $("#crescenza-e-decrescenza").css("display", "none");

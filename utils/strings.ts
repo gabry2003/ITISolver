@@ -20,24 +20,24 @@ const strings = {
                     "name": "Studio funzione",
                     "url": "index.pug"
                 },
-                /*{
-                    "name": "Soluzione equazione",
-                    "url": "soluzione-equazione.pug"
-                },
-                {
-                    "name": "Soluzione limite",
-                    "url": "limite.pug"
-                },
-                {
-                    "name": "Grafico funzione",
-                    "url": "grafico-funzione.pug"
-                }*/
+                // {
+                //     "name": "Soluzione equazione",
+                //     "url": "soluzione-equazione.pug"
+                // },
+                // {
+                //     "name": "Soluzione limite",
+                //     "url": "limite.pug"
+                // },
+                // {
+                //     "name": "Grafico funzione",
+                //     "url": "grafico-funzione.pug"
+                // }
             ]
         },
-        {
-            "name": "Impostazioni",
-            "url": "impostazioni.pug"
-        }
+        // {
+        //     "name": "Impostazioni",
+        //     "url": "impostazioni.pug"
+        // }
     ]
 };
 

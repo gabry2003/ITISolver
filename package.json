@@ -2,30 +2,30 @@
     "name": "itisolver",
     "version": "1.0.0",
     "description": "Programma che risolve le equazioni di ogni grado, le scompone e risolve altri problemi matematici con tutti i passaggi",
-    "main": "index.js",
+    "main": "./js/index.js",
     "scripts": {
         "compile": "./node_modules/.bin/tsc",
         "start": "npm run compile && electron js/index.js --trace-warnings",
         "clean": "rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf js && rm -rf src",
         "dev": "APP_DEV=true npm start",
-        "pack": "electron-builder --dir",
-        "dist": "npm run compile && electron-builder",
+        "dist": "npm run compile && electron-builder --x64 -wl",
         "generate-docs": "./node_modules/.bin/jsdoc ./* -c ./jsdoc.json -d ./docs/it/ -R README.md --verbose --recurse"
     },
     "build": {
+        "files": ["**/*", "js/**/*"],
+        "appId": "it.princiotta.itisolver",
         "win": {
             "asar": true,
             "icon": "images/icon.png",
             "target": [
-                "msi"
+                "NSIS"
             ]
         },
         "linux": {
             "asar": true,
             "icon": "./build/icon.icns",
             "target": [
-                "deb",
-                "rpm"
+                "deb"
             ],
             "executableName": "ITISolver"
         }
@@ -44,7 +44,8 @@
         "email": "gabriprinciott@gmail.com",
         "url": "https://gabriprinciott.it/"
     },
-    "contributors": [{
+    "contributors": [
+        {
             "name": "Gabriele Princiotta",
             "email": "gabriprinciott@gmail.com",
             "url": "https://gabriprinciott.it/"
@@ -65,6 +66,7 @@
         "@types/jquery": "^3.5.5",
         "@types/node": "^15.3.0",
         "electron": "^12.0.6",
+        "electron-builder": "^23.0.3",
         "html-webpack-plugin": "^5.3.1",
         "ts-loader": "^9.2.1",
         "typescript": "^4.2.4",

@@ -2,6 +2,8 @@ import { BrowserWindow } from 'electron';
 import setupPug from 'electron-pug';
 import strings from './utils/strings';
 import upath from 'upath';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
@@ -29,9 +31,19 @@ export default class Main {
 
         Main.mainWindow.setTitle(strings.app.nome);
         Main.mainWindow.maximize();
-        // TODO: Da togliere
-        Main.mainWindow.webContents.openDevTools();
-        Main.mainWindow.loadFile('../pages/index.pug');
+        Main.mainWindow.removeMenu();
+        let pagesFolder;
+
+        const pagesFolder1 = resolve(__dirname, '../pages');
+        const pagesFolder2 = resolve(__dirname, 'pages');
+
+        if(existsSync(pagesFolder1)) {
+            pagesFolder = pagesFolder1;
+        }else {
+            pagesFolder = pagesFolder2;
+        }
+
+        Main.mainWindow.loadFile(`${pagesFolder}/index.pug`);
     }
 
     private static async onReady() {
