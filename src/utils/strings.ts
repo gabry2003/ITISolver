@@ -1,16 +1,11 @@
 const strings = {
     "app": {
         "nome": "ITISolver",
-        "author": "Gabriele Princiotta & Antonino Faraci",
+        "author": "Gabriele Princiotta",
         "authors": [{
                 "name": "Gabriele Princiotta",
                 "github": "https://github.com/gabry2003/",
-                "website": "https://gabriprinciott.it"
-            },
-            {
-                "name": "Antonino Faraci",
-                "github": "https://github.com/Anto-2004/",
-                "website": "http://antoninofaraci.herokuapp.com"
+                "website": "https://gabrieleprinciotta.it"
             }
         ]
     },

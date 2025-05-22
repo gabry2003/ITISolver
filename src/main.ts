@@ -1,7 +1,6 @@
 import { BrowserWindow, IpcMain } from "electron";
 import setupPug from "electron-pug";
 import strings from "./utils/strings";
-import upath from "upath";
 import { join } from "path";
 
 export default class Main {
@@ -21,17 +20,32 @@ export default class Main {
       width: 800,
       height: 600,
       webPreferences: {
-        nodeIntegration: false, // is default value after Electron v5
-        contextIsolation: true, // protect against prototype pollution
+        nodeIntegration: true, // is default value after Electron v5
+        contextIsolation: false, // protect against prototype pollution
         enableRemoteModule: false, // turn off remote
+        sandbox: false,
         preload: join(__dirname, "preload.js"), // use a preload script
       },
       icon: `${__dirname}/../public/assets/images/icon.png`,
     });
 
+
+    Main.mainWindow.webContents.on('console-message', (e, level, message) => {
+      console.log(`[Renderer] ${message}`);
+    });
+
+    Main.mainWindow.webContents.on('did-fail-load', (e, code, desc) => {
+      console.error(`❌ Failed to load: ${desc} (code: ${code})`);
+    });
+
+    Main.mainWindow.webContents.on('crashed', () => {
+      console.error("💥 Renderer process crashed");
+    });
+
     Main.mainWindow.setTitle(strings.app.nome);
     Main.mainWindow.maximize();
     Main.mainWindow.loadFile(`${__dirname}/../public/pages/index.pug`);
+    Main.mainWindow.webContents.openDevTools({ mode: 'detach' });
   }
 
   private static async onReady() {
@@ -75,11 +89,7 @@ export default class Main {
       : false;
 
     if (isDev) {
-      require("electron-reload")(__dirname, {
-        electron: upath.toUnix(
-          upath.join(__dirname, "node_modules", ".bin", "electron")
-        ),
-      });
+      require("electron-reload")(__dirname);
     }
   }
 }

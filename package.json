@@ -6,7 +6,7 @@
     "scripts": {
         "build": "tsc",
         "start": "npm run build && electron .",
-        "clean": "rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf js && rm -rf src",
+        "clean": "rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf js",
         "dev": "APP_DEV=true npm start",
         "pack": "electron-builder --dir",
         "dist": "npm run build && electron-builder",
@@ -15,7 +15,7 @@
     "build": {
         "win": {
             "asar": true,
-            "icon": "public/asstes/images/icon.png",
+            "icon": "public/assets/images/icon.png",
             "target": [
                 "msi"
             ]
@@ -49,11 +49,6 @@
             "name": "Gabriele Princiotta",
             "email": "gabriprinciott@gmail.com",
             "url": "https://gabriprinciott.it/"
-        },
-        {
-            "name": "Antonino Faraci",
-            "email": "antoninofaraci04@gmail.com",
-            "url": "http://antoninofaraci04.altervista.org/"
         }
     ],
     "license": "ISC",
@@ -62,15 +57,15 @@
     },
     "homepage": "https://github.com/gabry2003/ITISolver#readme",
     "devDependencies": {
-        "@evolvementdev/mathsolver": "^0.0.1",
-        "@types/electron": "^1.6.10",
-        "@types/jquery": "^3.5.5",
+        "@evolvementdev/mathsolver": "file:../mathSolver",
+        "@types/electron": "^1.6.12",
+        "@types/jquery": "^3.5.32",
         "@types/mathjax": "^0.0.37",
-        "@types/node": "^15.3.0",
-        "electron": "^12.0.6",
+        "@types/node": "^22.15.21",
+        "electron": "^12.2.3",
         "html-webpack-plugin": "^5.3.1",
         "ts-loader": "^9.2.1",
-        "typescript": "^4.2.4",
+        "typescript": "^5.8.3",
         "webpack": "^5.37.1",
         "webpack-cli": "^4.7.0"
     },
@@ -81,6 +76,7 @@
         "electron-reload": "^1.5.0",
         "esm": "^3.2.25",
         "jsdoc": "^3.6.6",
+        "markdown-it": "^14.1.0",
         "mathjax": "^3.2.0",
         "minami": "^1.2.3",
         "node-notifier": "^9.0.1",
