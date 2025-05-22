@@ -4,9 +4,9 @@
     "description": "Programma che risolve le equazioni di ogni grado, le scompone e risolve altri problemi matematici con tutti i passaggi",
     "main": "./js/index.js",
     "scripts": {
-        "compile": "./node_modules/.bin/tsc",
-        "start": "npm run compile && electron js/index.js --trace-warnings",
-        "clean": "rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf js && rm -rf src",
+        "build": "tsc",
+        "start": "npm run build && electron .",
+        "clean": "rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf js",
         "dev": "APP_DEV=true npm start",
         "dist": "npm run compile && electron-builder --x64 -wl",
         "generate-docs": "./node_modules/.bin/jsdoc ./* -c ./jsdoc.json -d ./docs/it/ -R README.md --verbose --recurse"
@@ -16,7 +16,7 @@
         "appId": "it.princiotta.itisolver",
         "win": {
             "asar": true,
-            "icon": "images/icon.png",
+            "icon": "public/assets/images/icon.png",
             "target": [
                 "NSIS"
             ]
@@ -51,18 +51,13 @@
             "name": "Gabriele Princiotta",
             "email": "gabriprinciott@gmail.com",
             "url": "https://gabriprinciott.it/"
-        },
-        {
-            "name": "Antonino Faraci",
-            "email": "antoninofaraci04@gmail.com",
-            "url": "http://antoninofaraci04.altervista.org/"
         }
     ],
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/gabry2003/IntersezioniConGliAssi/issues"
+        "url": "https://github.com/gabry2003/ITISolver/issues"
     },
-    "homepage": "https://github.com/gabry2003/IntersezioniConGliAssi#readme",
+    "homepage": "https://github.com/gabry2003/ITISolver#readme",
     "devDependencies": {
         "@types/electron": "^1.6.10",
         "@types/jquery": "^3.5.5",
@@ -71,7 +66,7 @@
         "electron-builder": "^23.0.3",
         "html-webpack-plugin": "^5.3.1",
         "ts-loader": "^9.2.1",
-        "typescript": "^4.2.4",
+        "typescript": "^5.8.3",
         "webpack": "^5.37.1",
         "webpack-cli": "^4.7.0"
     },
@@ -82,6 +77,8 @@
         "electron-reload": "^1.5.0",
         "esm": "^3.2.25",
         "jsdoc": "^3.6.6",
+        "markdown-it": "^14.1.0",
+        "mathjax": "^3.2.0",
         "minami": "^1.2.3",
         "node-notifier": "^9.0.1",
         "path": "^0.12.7",

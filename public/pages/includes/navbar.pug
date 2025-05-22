@@ -1,0 +1,25 @@
+.navbar.navbar-expand-lg.fixed-top.navbar-dark.bg-primary
+    .container
+        a.navbar-brand(href='index.pug')=strings.app.nome
+        button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+        #navbarResponsive.collapse.navbar-collapse
+            ul.navbar-nav
+                each page in strings.menu
+                    if page.subs !== undefined && page.subs !== null
+                        li.nav-item.dropdown
+                            a.nav-link.dropdown-toggle(data-bs-toggle='dropdown' href='#' id='menu-' + page.name)
+                                | #{page.name}
+                                span.caret
+                            .dropdown-menu(aria-labelledby='menu-' + page.name)
+                                each sub_page in page.subs
+                                    a.dropdown-item(href=sub_page.url)=sub_page.name
+                    else
+                        li.nav-item
+                            a.nav-link(href=page.url)=page.name
+            ul.navbar-nav.ms-md-auto
+                each author in strings.app.authors
+                    li.nav-item
+                        a.nav-link(target='_blank' rel='noopener' href=author.website)
+                            i.fab.fa-instagram
+                            | &nbsp; #{author.name}

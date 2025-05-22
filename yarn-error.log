@@ -61,7 +61,7 @@ npm manifest:
           "math",
           "solver"
       ],
-      "author": "Gabriele Princiotta & Antonino Faraci",
+      "author": "Gabriele Princiotta",
       "license": "ISC",
       "bugs": {
           "url": "https://github.com/gabry2003/IntersezioniConGliAssi/issues"

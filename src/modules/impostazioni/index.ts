@@ -1,7 +1,11 @@
-const DbManager = require('../db-manager');
+import { DbManager } from '../../db-manager';
 
 class Impostazioni {
-    static elementi = [{
+    static elementi: {
+        el: string,
+        name: string,
+        defaultValue?: any
+    }[] = [{
             el: '#intersezioneConGliAssi',
             name: 'intersezioneConGliAssi'
         },
@@ -63,7 +67,7 @@ class Impostazioni {
      */
     static async get(name, def) {
         try {
-            return DbManager.db.get(`impostazioni`).get(name).value();
+            return DbManager.instance.db.get(`impostazioni`).get(name).value();
         } catch (e) {
             console.error(e);
             return def;
@@ -78,7 +82,7 @@ class Impostazioni {
      */
     static async set(name, value) {
         try {
-            DbManager.db.set(`impostazioni.${name}`, value).save();
+            DbManager.instance.db.set(`impostazioni.${name}`, value).save();
             console.log(`impostato ${name} in`, value);
         } catch (e) {
             console.error(e);
@@ -126,7 +130,6 @@ class Impostazioni {
 }
 
 Impostazioni.caricaImpostazioni();
-
 
 $('#form-impostazioni').on('submit', e => {
     e.preventDefault();

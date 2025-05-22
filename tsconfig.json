@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es2020",
-        "outDir": "js",
+        "outDir": "dist",
         "module": "commonjs",
         "moduleResolution": "node",
         "lib": ["es2015", "dom"],
@@ -9,18 +9,18 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": false,
-        "suppressImplicitAnyIndexErrors": true,
         "esModuleInterop": true,
         "preserveConstEnums": true,
-        "strict": true,
+        "strict": false,
         "removeComments": true,
         "resolveJsonModule": true,
         "forceConsistentCasingInFileNames": true,
         "noUnusedLocals": false,
         "noUnusedParameters": false,
+        "skipLibCheck": true
     },
     "include": [
-        "**/*.ts", "db-manager.js", "impostazioni.js"
+        "**/*.ts", "src/db-manager.ts"
     ],
     "exclude": [
         "build",

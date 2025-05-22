@@ -1,1 +1,0 @@
-const grafico = new Grafico();

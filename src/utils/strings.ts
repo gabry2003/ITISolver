@@ -1,7 +1,7 @@
 const strings = {
     "app": {
         "nome": "ITISolver",
-        "author": "Gabriele Princiotta & Antonino Faraci",
+        "author": "Gabriele Princiotta",
         "authors": [{
                 "name": "Gabriele Princiotta",
                 "github": "https://github.com/gabry2003/",
